@@ -50,12 +50,16 @@ public class ViewManageSheetsColumns extends JDialog {
 			{
 				JList<String> listColumns = new JList<String>();
 				listColumns.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-				listColumns.setModel(new AbstractListModel() {
-					String[] values = new String[] {};
+				listColumns.setModel(new AbstractListModel<String>() {
+					/**
+					 * 
+					 */
+					private static final long serialVersionUID = 1L;
+					String[] values = new String[] {"TEST1", "TEST2"};
 					public int getSize() {
 						return values.length;
 					}
-					public Object getElementAt(int index) {
+					public String getElementAt(int index) {
 						return values[index];
 					}
 				});

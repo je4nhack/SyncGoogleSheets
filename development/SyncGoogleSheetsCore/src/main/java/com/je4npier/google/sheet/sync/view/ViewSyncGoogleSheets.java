@@ -478,6 +478,8 @@ public class ViewSyncGoogleSheets {
 		panel_6.add(btnTest);
 		
 		JButton btnGestionarColumnas = new JButton("Gestionar columnas");
+		btnGestionarColumnas.setEnabled(false);
+		btnGestionarColumnas.setToolTipText("En desarrollo");
 		btnGestionarColumnas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				new ViewManageSheetsColumns(frmSyncOracleAnd, null);
