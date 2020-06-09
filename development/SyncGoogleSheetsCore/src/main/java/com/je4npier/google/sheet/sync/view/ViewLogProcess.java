@@ -22,8 +22,12 @@ public class ViewLogProcess extends JDialog implements WriteLog {
 	
 	private static final long serialVersionUID = 1L;
 	private JTextArea textAreaLogProcess;
+	private JButton btnCerrar;
 	
 	private RunnableProcess process;
+	private SwingWorker<String, Void> worker;
+	
+	private boolean isRunning;
 	
 	/**
 	 * @wbp.parser.constructor
@@ -61,10 +65,17 @@ public class ViewLogProcess extends JDialog implements WriteLog {
 		JPanel panel = new JPanel();
 		this.getContentPane().add(panel, BorderLayout.SOUTH);
 		
-		JButton btnCerrar = new JButton("Cerrar");
+		btnCerrar = new JButton("Cerrar");
 		btnCerrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				dispose();
+				if(isRunning) {
+					worker.cancel(true);
+					addLog("Proceso detenido por el usuario");
+					btnCerrar.setText("Cerrar");
+					isRunning = false;
+				}else {
+					dispose();
+				}
 			}
 		});
 		panel.add(btnCerrar);
@@ -83,10 +94,12 @@ public class ViewLogProcess extends JDialog implements WriteLog {
 	
 	private void runProcess() {
 		if(process != null) {
-			SwingWorker<String, Void> worker = new SwingWorker<String, Void>(){
+			worker = new SwingWorker<String, Void>(){
 
 				@Override
 				protected String doInBackground() throws Exception {
+					isRunning = true;
+					btnCerrar.setText("Detener proceso");
 					process.run();
 					return null;
 				}
@@ -94,6 +107,8 @@ public class ViewLogProcess extends JDialog implements WriteLog {
 				@Override
 				protected void done() {
 					super.done();
+					isRunning = false;
+					btnCerrar.setText("Cerrar");					
 				}
 				
 			};
