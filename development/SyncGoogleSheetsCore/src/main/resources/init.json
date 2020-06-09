@@ -1,0 +1,11 @@
+{
+	"useProxy": false,
+	"proxyHost": "118.180.54.170",
+	"proxyPort": "8080",
+	"dbName": "Oracle",
+	"dbStringConnection": "jdbc:oracle:thin:@118.180.39.100:1521:BSIBPDW0",
+	"dbUserName": "USRTANALYT",
+	"dbPassword": "e3p9l9",
+	"ignoreNewColumns": false,
+	"ignoreNotFoundColumns": true
+}
